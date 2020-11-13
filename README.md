@@ -1,5 +1,22 @@
 # RecyclerView
 
+## 0.- Config View to use ViewBinding
+
+
+📄 build.gradle(Module: app)
+
+```
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+.
+.
+    buildFeatures {
+        viewBinding = true
+    }
+}    
+```
+
 ## 1.- Add Dependency 
 
 ```
@@ -15,8 +32,19 @@ recyclerview
 Create the recyclerview inside XML, dont forget put the **Id**
 
 ```
-somethingRecyclerView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView"
+        />
 ```
+
+somethingRecyclerView | recycler
+
 
 ## 3.- Create the another Xml for items
 
@@ -52,8 +80,15 @@ holder.bind(dataList.get(position))
 3.- getItemCount: cantidad de items  (dataList.count)
 
 
-## 7.- Make the inne class heritage from RecyclerView.ViewHolder
+## 7.- Make the inner class heritage from RecyclerView.ViewHolder
 
+Musk take into account the parent class is abstract, then will be receibe arguments:
+
+```
+class ViewHolder(view: View): RecyclerView.ViewHolder(view)
+```
+
+Este guardara la vista que tenga una posicion espeficica que tenga en este momento
 
 ## 8.- Make constructor for inner class
 
@@ -86,6 +121,12 @@ This will be:
 - Adapter: Instatiate Adapter, inject data to Adapter 
 - Layoutmanager: Set Layoutmanget to RecyclerView
 - Adapter: Set Adapter to RecyclerView
+
+Un alcanze, el LayoutManager tambien se pude settear en el XML:
+
+```
+app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+```
 
 
 ## 14.- Run.
