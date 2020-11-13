@@ -92,14 +92,35 @@ data class Movie(val title: String, val cover: String)
 ## 5.- Create the Adapter
 
 - Create a new class for Adapter, this heritange for RecyclerView.Adapter<<NameAdapter.ViewHolderInnerClas>>
-- Make constructor that inject List<Movie>
-- .
 
+```
+class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+
+
+    class ViewHolder : RecyclerView.ViewHolder(){
+
+    }
+
+}
+```
+
+- Make constructor that inject List<Movie>
+
+```
+class MoviesAdapter(private val movies: List<Movie>): 
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+    ...
+```
 
 ## 6.- Create the new inner class that claim 
 
 This claim should heritage from RecyclerView.ViewHolder
 
+```
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+
+    }
+```
 
 ## 7.- Create the three methods thats claim for Adapter
 
@@ -113,6 +134,17 @@ holder.bind(dataList.get(position))
 
 3.- getItemCount: cantidad de items  (dataList.count)
 
+```
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemCount() = movies.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        TODO("Not yet implemented")
+    }
+```
 
 
 ## 8.- Make the inner class heritage from RecyclerView.ViewHolder
@@ -120,10 +152,14 @@ holder.bind(dataList.get(position))
 Musk take into account the parent class is abstract, then will be receibe arguments:
 
 ```
-class ViewHolder(view: View): RecyclerView.ViewHolder(view)
+   class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+
+    }
 ```
 
 Este guardara la vista que tenga una posicion espeficica que tenga en este momento
+
+P: Que es el ViewHolder, es el componente dentro del Adapter que va a contener la vista.
 
 ## 9.- Make constructor for inner class
 
