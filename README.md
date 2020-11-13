@@ -168,7 +168,7 @@ this class will be set data to list_item_something component's
 For now we use a ViewBinding:
 
 ```
-    class ViewHolder(binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 ```
@@ -211,16 +211,50 @@ Now we use a ViewBinding, also we have access total to all component in list_ite
 // Don't need make anything here now.
 ```
 
+
+
 ## 12.- Implements the generates methods
 
-Implements the three method for Adapter.
+Implements the three method for Adapter. and basic struct for **bind** method
 
+```
+class MoviesAdapter(private val movies: List<Movie>):
+    RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ViewMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun getItemCount() = movies.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(movies[position])
+    }
+
+    class ViewHolder(private val binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
+
+        fun bind(movie: Movie) {
+
+        }
+    }
+
+}
+```
 
 
 ## 13.- Create method in ViewHolder inner class to bind and use in onBindViewHolder
 
 this methods receive the exactly item to show
 
+```
+    class ViewHolder(private val binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
+
+        fun bind(movie: Movie) {
+            binding.titleTextView.text = movie.title
+        }
+    }
+```
 
 ## 14.- In Main set all necessary for RecyclerView works
 
@@ -235,7 +269,29 @@ This will be:
 Un alcanze, el LayoutManager tambien se pude settear en el XML:
 
 ```
-app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val movies: List<Movie> = listOf(
+            Movie("Title 1", "url 1"),
+            Movie("Title 2", "url 2"),
+            Movie("Title 3", "url 3"),
+            Movie("Title 4", "url 4"),
+            Movie("Title 5", "url 5"),
+            Movie("Title 6", "url 6")
+        )
+
+        binding.recycler.adapter = MoviesAdapter(movies)
+        binding.recycler.layoutManager = LinearLayoutManager(this)
+
+    }
+}
 ```
 
 

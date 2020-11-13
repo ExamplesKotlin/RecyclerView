@@ -1,5 +1,6 @@
 package com.arqoders.recyclerviewprj
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,17 +10,21 @@ class MoviesAdapter(private val movies: List<Movie>):
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
+        val binding = ViewMovieItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun getItemCount() = movies.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(movies[position])
     }
 
-    class ViewHolder(binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(private val binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
 
+        fun bind(movie: Movie) {
+            binding.titleTextView.text = movie.title
+        }
     }
 
 }

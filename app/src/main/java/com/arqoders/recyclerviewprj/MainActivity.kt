@@ -2,6 +2,8 @@ package com.arqoders.recyclerviewprj
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arqoders.recyclerviewprj.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,5 +25,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         binding.recycler.adapter = MoviesAdapter(movies)
+        binding.recycler.layoutManager = LinearLayoutManager(this)
+
     }
 }
