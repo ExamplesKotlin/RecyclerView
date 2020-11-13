@@ -165,18 +165,57 @@ P: Que es el ViewHolder, es el componente dentro del Adapter que va a contener l
 
 this class will be set data to list_item_something component's
 
+For now we use a ViewBinding:
+
+```
+    class ViewHolder(binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
+
+    }
+```
+
 ## 10.- Create a dataList for Adapter
 
 This dataList will be inject for Contructor from Adapter
 
+```
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val movies: List<Movie> = listOf(
+            Movie("Title 1", "url 1"),
+            Movie("Title 2", "url 2"),
+            Movie("Title 3", "url 3"),
+            Movie("Title 4", "url 4"),
+            Movie("Title 5", "url 5"),
+            Movie("Title 6", "url 6"),
+        )
+
+        binding.recycler.adapter = MoviesAdapter(movies)
+    }
+}
+```
+
 ## 11.- Generate link to components of list_item_something in ViewHolder inner
 
-create a properties for all component from list_item_something (las time use a bindView)
+Create a properties for all component from list_item_something (las time use a bindView)
 
+Now we use a ViewBinding, also we have access total to all component in list_item_something
+
+```
+// Don't need make anything here now.
+```
 
 ## 12.- Implements the generates methods
 
 Implements the three method for Adapter.
+
+
 
 ## 13.- Create method in ViewHolder inner class to bind and use in onBindViewHolder
 

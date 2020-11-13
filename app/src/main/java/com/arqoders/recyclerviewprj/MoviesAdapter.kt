@@ -3,6 +3,7 @@ package com.arqoders.recyclerviewprj
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.arqoders.recyclerviewprj.databinding.ViewMovieItemBinding
 
 class MoviesAdapter(private val movies: List<Movie>):
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -17,7 +18,7 @@ class MoviesAdapter(private val movies: List<Movie>):
         TODO("Not yet implemented")
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class ViewHolder(binding: ViewMovieItemBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 
