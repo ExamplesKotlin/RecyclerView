@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.arqoders.recyclerviewprj.databinding.ViewMovieItemBinding
+import com.bumptech.glide.Glide
 
 class MoviesAdapter(private val movies: List<Movie>):
     RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
@@ -24,6 +25,9 @@ class MoviesAdapter(private val movies: List<Movie>):
 
         fun bind(movie: Movie) {
             binding.titleTextView.text = movie.title
+            Glide.with(binding.root.context)
+                .load(movie.cover)
+                .into(binding.profileImageView)
         }
     }
 
